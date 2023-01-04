@@ -43,7 +43,24 @@
     </div>
     
     <div class="specific">
-        
+        <nav class="flex">
+            <h1 style="cursor: pointer;" onclick="hidden0()"><span><i class="fa-solid fa-circle-chevron-left"></i></span> Back</h1>
+            <div id="add_task" onclick="addTask_popup()"><h4><i class="fa-solid fa-circle-plus"></i> Add Item</h4></div>
+        </nav>
+        <div class="content_X">
+            <div class="card">
+                <button id='title'>Trip to Paris</button>
+                <div class="content">
+                    <table class="table">
+                        
+                    </table>
+                </div>
+                <div class="option">
+                    <button class="delete" value=${value.id} onclick='deleteCard(this.value)'><i class="fa-solid fa-trash"></i></button>
+                    <button class="edit" value="${value.id}" onclick="pop_up_task_card(this.value)"><i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>

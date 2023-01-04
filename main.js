@@ -2,6 +2,8 @@ let data=[];
 let title_btn = document.querySelector('#add_title');
 let title = document.querySelector('#add_task_title');
 let add_taskInCard=document.querySelector('#add_taskInCard');
+let container=document.querySelector('.container')
+let sep_val=document.querySelector(".specific");
 title_btn.addEventListener('click',()=>{
     let name = title.value
     let ids=Date.now()
@@ -43,7 +45,6 @@ function main_list(){
             </tr>`
             }
         }
-
     }
     for(obj of data){
         let list0=document.getElementsByClassName(`${obj.id}`);
@@ -63,7 +64,7 @@ function addTask(){
 
     data.forEach((value)=>{
     card += `<div class="card" id="${value.id}">
-            <h2 id='title'>${value.title}</h2>
+            <button id='title' value="${value.id}" onclick="specific(this.value)">${value.title}</button>
             <div class="content">
                 <table class="${value.id}" id="${value.id+1}" class="table">
 
@@ -103,9 +104,6 @@ function strike(value1){
         }
     }
     let done=document.getElementById(`${value1}`)
-    // if(done.id==value1){
-    //     done.style.display="none"
-    // }
     console.log(done)
 }
 
@@ -138,4 +136,23 @@ function deleteCard(main){
     }
 delete_div.parentNode.removeChild(delete_div);
 console.log(data)
+}
+let title_specific = document.querySelector('#title');
+function specific(val2){
+    container.style.display="none"
+    sep_val.style.display="block"
+    let element=document.querySelector('.content_X');
+    let item='';
+    data.forEach((val1)=>{
+        if(val1.id==val2){
+            title_specific.innerHTML = `${val1.title}`
+        }
+    })
+    console.log(val2)
+    // element.innerHTML=item
+}
+
+function hidden0(){
+    sep_val.style.display="none"
+    container.style.display="block"
 }
