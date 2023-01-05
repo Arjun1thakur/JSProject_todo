@@ -24,38 +24,34 @@ function pop_up_task_card(val){
 
 function main_list(){
     let pop_window=document.querySelector('.blur2');
-    let table=document.querySelector('.table')
     let item='';
     for(obj of data){
-        for(prop in obj){
-            for(prop in obj){
-            if(obj.id==val0){
+        if(obj.id==val0){
+            if(obj.content.size<5){
                 obj.content.add(add_taskInCard.value)
+            }else{
+                alert("Limit Over")
                 }
-            }
         }
     }
-
     for(obj of data){
         for(main of obj.content){
             if(obj.id==val0){
                 item+=`<tr>
                 <td><h2 id="${main}" class="items" value="${main}">${main}</h2></td>
-                <td><button class="done" id="${obj.id+1}" value="${main}" onclick='strike(this.value)'>Done</button></td>
+                <td><button class="done" id="check_btn_${main}" value="${main}" onclick='strike(this.value)'>Done</button></td>
             </tr>`
             }
         }
     }
     for(obj of data){
         let list0=document.getElementsByClassName(`${obj.id}`);
-        console.log(list0[0])
         if(list0[0].id==(Number(val0)+1)){
             list0[0].innerHTML=item; 
         }
     }
     pop_window.style.display='none'
     console.log(data)
-
 }
 
 function addTask(){
@@ -94,6 +90,8 @@ setInterval(()=>{
 
 function strike(value1){
     let strike=document.getElementById(`${value1}`)
+    console.log(strike);
+    // let done_str=document.getElementById(`check_btn_${value1}`)
     for(obj of data){
         for(main of obj.content){
             if(main==value1){
@@ -103,8 +101,7 @@ function strike(value1){
             }
         }
     }
-    let done=document.getElementById(`${value1}`)
-    console.log(done)
+    // let done=document.getElementById(`${value1}`)
 }
 
 function addTask_popup(){
@@ -125,17 +122,11 @@ function close_popup_card(){
 function deleteCard(main){
     var delete_div = document.getElementById(`${main}`);
     for(obj of data){
-        for(prop in obj){
-            for(prop in obj){
-            if(obj.id==main){
-                data.splice(0,1)
-                break;
-                }
-            }
+        if(obj.id==main){
+            data.splice(data.findIndex(obj => obj.id == main) , 1)
         }
     }
 delete_div.parentNode.removeChild(delete_div);
-console.log(data)
 }
 let title_specific = document.querySelector('#title');
 function specific(val2){
@@ -148,7 +139,6 @@ function specific(val2){
             title_specific.innerHTML = `${val1.title}`
         }
     })
-    console.log(val2)
     // element.innerHTML=item
 }
 
