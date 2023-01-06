@@ -1,4 +1,5 @@
 let data=[];
+let i=0;
 let title_btn = document.querySelector('#add_title');
 let title = document.querySelector('#add_task_title');
 let add_taskInCard=document.querySelector('#add_taskInCard');
@@ -36,10 +37,11 @@ function main_list(){
     }
     for(obj of data){
         for(main of obj.content){
+            i=i+1
             if(obj.id==val0){
                 item+=`<tr>
-                <td><h2 id="${main}" class="items" value="${main}">${main}</h2></td>
-                <td><button class="done" id="check_btn_${main}" value="${main}" onclick='strike(this.value)'>Done</button></td>
+                <td><h2 id="${Date.now()+i}" class="items" value="${main}">${main}</h2></td>
+                <td><button class="done" id="check_btn_${Date.now()+i}" value="${Date.now()+i}" onclick='strike(this.value)'>Done</button></td>
             </tr>`
             }
         }
@@ -89,19 +91,15 @@ setInterval(()=>{
 },0)
 
 function strike(value1){
+    console.log(value1)
     let strike=document.getElementById(`${value1}`)
-    console.log(strike);
-    // let done_str=document.getElementById(`check_btn_${value1}`)
-    for(obj of data){
-        for(main of obj.content){
-            if(main==value1){
-                strike.style.textDecoration= 'line-through';
-                strike.style.color= 'red';
-                break;
-            }
-        }
+    let hide_btn=document.getElementById(`check_btn_${value1}`)
+    console.log(strike.id)
+    if(value1==strike.id){
+        strike.style.textDecoration= 'line-through';
+        strike.style.color= 'red';
     }
-    // let done=document.getElementById(`${value1}`)
+    hide_btn.style.display="none"
 }
 
 function addTask_popup(){
@@ -132,14 +130,14 @@ let title_specific = document.querySelector('#title');
 function specific(val2){
     container.style.display="none"
     sep_val.style.display="block"
-    let element=document.querySelector('.content_X');
-    let item='';
     data.forEach((val1)=>{
         if(val1.id==val2){
             title_specific.innerHTML = `${val1.title}`
+            // if(data.content[0]){
+
+            // }
         }
     })
-    // element.innerHTML=item
 }
 
 function hidden0(){
